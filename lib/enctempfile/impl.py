@@ -88,6 +88,12 @@ class Block(object):
 
         return len(encrypted)
 
+    def truncate(self, *a, **kw):
+        if self.buffer is None:
+            self.buffer = io.BytesIO()
+            self._load_buffer_from_fp()
+        return self.buffer.truncate(*a, **kw)
+
     def close(self):
         if self.fp is not None:
             self.fp.close()
@@ -287,7 +293,28 @@ class TemporaryFile(object):
         return True
 
     def truncate(self, size=None):
-        raise Exception("Not Implemented")
+        current_position = self.position
+
+        if size is not None:
+            self.seek(self.size, os.SEEK_CUR)
+
+        block_number = self._get_block_number(self.position)
+
+        # remove every block larger than this number
+        for local_block_number, local_block in self.blocks.items():
+            if local_block_number > block_number:
+                local_block.close()
+                del self.blocks[local_block_number]
+
+        # truncate this block as necessary
+        current_block = self._get_block(block_number)
+        if current_block is not None:
+            block_local_position = self._get_block_local_position(block_number)
+            current_block.seek(block_local_position)
+            current_block.truncate()
+            current_block.flush()
+
+        self.seek(current_position)
 
     def writable(self):
         return True
