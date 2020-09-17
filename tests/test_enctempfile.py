@@ -78,3 +78,12 @@ def test_random():
         assert in_hash.hexdigest() == out_hash.hexdigest()
         assert in_buffer.getvalue() == out_buffer.getvalue()
 
+
+# there was a bug where reading from an otherwise untouched file would hang
+# forever
+def test_empty():
+
+     with enctempfile.TemporaryFile(block_size=5000) as fp:
+         data = fp.read()
+
+         assert data == b""

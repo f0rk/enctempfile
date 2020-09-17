@@ -2,7 +2,7 @@
 
 from .impl import TemporaryFile
 
-__version__ = "0.2"
+__version__ = "0.3"
 
 __all__ = [
     "TemporaryFile",

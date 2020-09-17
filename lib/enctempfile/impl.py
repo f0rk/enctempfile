@@ -98,6 +98,10 @@ class Block(object):
         if self.fp is not None:
             self.fp.close()
 
+        self.key = None
+        self.buffer = None
+        self.fp = None
+
 
 DEFAULT_BLOCK_SIZE = 1024 * 1024 * 16
 
@@ -200,6 +204,8 @@ class TemporaryFile(object):
         for block in self.blocks.values():
             block.close()
 
+        self.blocks = {}
+
         self.closed = True
 
     def flush(self):
@@ -256,6 +262,9 @@ class TemporaryFile(object):
 
                 # if this is the last block, return nothing
                 max_block_number = self._get_max_block_number()
+                if max_block_number is None:
+                    return b"".join(ret_buffer)
+
                 if max_block_number == block_number:
                     return b"".join(ret_buffer)
 
