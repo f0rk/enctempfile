@@ -310,7 +310,7 @@ class TemporaryFile(object):
         block_number = self._get_block_number(self.position)
 
         # remove every block larger than this number
-        for local_block_number, local_block in list(self.blocks.items()):
+        for local_block_number, local_block in self.blocks.items():
             if local_block_number > block_number:
                 local_block.close()
                 del self.blocks[local_block_number]
