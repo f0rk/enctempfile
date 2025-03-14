@@ -246,6 +246,8 @@ class TemporaryFile(object):
         else:
             raise ValueError("Invalid value for whence {!r}".format(whence))
 
+        return self.position
+
     def read(self, size=-1):
 
         ret_buffer = []

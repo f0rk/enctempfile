@@ -1,11 +1,11 @@
-# Copyright 2019-2020, Ryan P. Kelly.
+# Copyright 2019-2025, Ryan P. Kelly.
 
 from setuptools import setup
 
 
 setup(
     name="enctempfile",
-    version="0.4",
+    version="0.5",
     description="Transparently encrypted temporary files",
     author="Ryan P. Kelly",
     author_email="ryan@ryankelly.us",
@@ -21,7 +21,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
     ],
