@@ -191,6 +191,8 @@ class TemporaryFile(object):
             current_block.write(b)
             self.position += len(b)
 
+        return len(b)
+
     def fileno(self):
         raise OSError("no fileno")
 

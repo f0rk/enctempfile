@@ -5,7 +5,7 @@ from setuptools import setup
 
 setup(
     name="enctempfile",
-    version="0.5",
+    version="0.6",
     description="Transparently encrypted temporary files",
     author="Ryan P. Kelly",
     author_email="ryan@ryankelly.us",
