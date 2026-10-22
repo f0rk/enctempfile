@@ -1,8 +1,8 @@
-# Copyright 2019-2025, Ryan P. Kelly.
+# Copyright 2019-2026, Ryan P. Kelly.
 
 from .impl import TemporaryFile
 
-__version__ = "0.6"
+__version__ = "1.0"
 
 __all__ = [
     "TemporaryFile",
